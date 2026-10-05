@@ -103,7 +103,20 @@ def update_patient(patient_id:int,patient_update:PatientUpdate):
     if patient_id not in data:
             raise HTTPException(status_code=404,detail="patient not found")
     #get existing patient data
-    existing_patient=data[patient_id]
+    existing_patient_info=data[patient_id]
     #convert obj into dict using model_dump from pydantic model
-    patient_update=patient_update.model_dump(exclude_unset=True)
-    # exclude unset gives only the updated fields 
+    # exclude unset gives only the updated fields
+    updated_patient_info=patient_update.model_dump(exclude_unset=True)
+    for key,value in updated_patient_info.items():
+        existing_patient_info[key]=value
+    
+    # existing_patient_into -> pydantic object -> bmi + verdict 
+    existing_patient_info['id']=patient_id
+    patient_pydantic_object=Patient(**existing_patient_info)
+    # -> pydantic object -> dict
+    existing_patient_info=patient_pydantic_object.model_dump(exclude='id')
+    
+    data[patient_id]=existing_patient_info
+    #save data
+    save_data(data)
+    
