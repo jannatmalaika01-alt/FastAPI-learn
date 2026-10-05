@@ -1,7 +1,7 @@
 from fastapi import FastAPI,Path,HTTPException,Query
 from fastapi.responses import JSONResponse
 import json
-from pydantic import BaseModel,Field,computed_field
+from pydantic import BaseModel,Field,computed_field,Optional
 from typing import Annotated,Literal
 
 app=FastAPI()
@@ -11,8 +11,8 @@ class Patient(BaseModel):
     name: Annotated[str,Field(...,description="name of patient",example="John Doe")]
     city: Annotated[str,Field(...,description="name of city",example="Lahore")]
     gender: Annotated[Literal['Male','Female','other'],Field(...,description="gender",example="Male,Female,other")]
-    height: Annotated[int,Field(...,gt=0,description="height of patient",example=186)]
-    weight: Annotated[int,Field(...,gt=0,description="weight of patient",example=88)]
+    height: Annotated[float,Field(...,gt=0,description="height of patient",example=186)]
+    weight: Annotated[float,Field(...,gt=0,description="weight of patient",example=88)]
 
     @computed_field
     @property
@@ -30,6 +30,15 @@ class Patient(BaseModel):
         else:
             return "overweight"
 
+#new pydantic model for put(update) request
+class PatientUpdate(BaseModel):
+    name: Annotated[Optional[str],Field(default=None)]
+    city: Annotated[Optional[str],Field(default=None)]
+    gender: Annotated[Optional[Literal['Male','female','other']],Field(default=None)]
+    height: Annotated[Optional[float],Field(default=None,gt=0)]
+    weight: Annotated[Optional[float],Field(default=None,gt=0)]
+    
+    
 def load_data():
     with open("patients.json",'r') as f:
         data=json.load(f)
@@ -85,3 +94,16 @@ def create_patient(patient:Patient):
     save_data(data)
 
     return JSONResponse(status_code=201,content={"message":"patient created successfully","id":patient.id})
+
+@app.put("/update/{patient_id}")
+def update_patient(patient_id:int,patient_update:PatientUpdate):
+    #load existing data
+    data=load_data()
+    #check if patient id exists
+    if patient_id not in data:
+            raise HTTPException(status_code=404,detail="patient not found")
+    #get existing patient data
+    existing_patient=data[patient_id]
+    #convert obj into dict using model_dump from pydantic model
+    patient_update=patient_update.model_dump(exclude_unset=True)
+    # exclude unset gives only the updated fields 
