@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "name": "Ali Khan",
+    "city": "Lahore",
+    "gender": "Male",
+    "height": 175,
+    "weight": 72,
+    "bmi": 23.5,
+    "verdict": "Normal"
+  },
+  {
+    "id": 2,
+    "name": "Sara Ahmed",
+    "city": "Karachi",
+    "gender": "Female",
+    "height": 162,
+    "weight": 78,
+    "bmi": 29.7,
+    "verdict": "Overweight"
+  },
+  {
+    "id": 3,
+    "name": "Hamza Malik",
+    "city": "Islamabad",
+    "gender": "Male",
+    "height": 180,
+    "weight": 95,
+    "bmi": 29.3,
+    "verdict": "Overweight"
+  },
+  {
+    "id": 4,
+    "name": "Ayesha Noor",
+    "city": "Multan",
+    "gender": "Female",
+    "height": 160,
+    "weight": 48,
+    "bmi": 18.8,
+    "verdict": "Normal"
+  },
+  {
+    "id": 5,
+    "name": "Usman Raza",
+    "city": "Faisalabad",
+    "gender": "Male",
+    "height": 170,
+    "weight": 105,
+    "bmi": 36.3,
+    "verdict": "Obese"
+  },
+  {
+    "id": 6,
+    "name": "Hina Shah",
+    "city": "Rawalpindi",
+    "gender": "Female",
+    "height": 168,
+    "weight": 55,
+    "bmi": 19.5,
+    "verdict": "Normal"
+  },
+  {
+    "id": 7,
+    "name": "Bilal Hassan",
+    "city": "Peshawar",
+    "gender": "Male",
+    "height": 165,
+    "weight": 50,
+    "bmi": 18.4,
+    "verdict": "Underweight"
+  },
+  {
+    "id": 8,
+    "name": "Mariam Ali",
+    "city": "Sialkot",
+    "gender": "Female",
+    "height": 158,
+    "weight": 85,
+    "bmi": 34.1,
+    "verdict": "Obese"
+  },
+  {
+    "id": 9,
+    "name": "Zain Ahmed",
+    "city": "Gujranwala",
+    "gender": "Male",
+    "height": 178,
+    "weight": 68,
+    "bmi": 21.5,
+    "verdict": "Normal"
+  },
+  {
+    "id": 10,
+    "name": "Fatima Zahra",
+    "city": "Quetta",
+    "gender": "Female",
+    "height": 155,
+    "weight": 43,
+    "bmi": 17.9,
+    "verdict": "Underweight"
+  }
+]
